@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate build artifact
         run: |
-          echo "This is the build output for Python ${ { matrix.python-version } }" > build_output.txt
+          echo "This is the build output for Python ${{ matrix.python-version }}" > build_output.txt
           echo "Timestamp: $(date)" >> build_output.txt
           echo "Runner: ${{ runner.os }}" >> build_output.txt
 
