@@ -1,10 +1,9 @@
 name: Matrix Build with Artifacts
 
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,25 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: matrix-f754fc5
-        run: echo "Building using Python version: ${{ matrix.python-version }}"
+        run: echo "Building for Python ${{ matrix.python-version }}"
 
       - name: Generate build artifact
         run: |
-          echo "This is the build output for Python ${{ matrix.python-version }}" > build_output.txt
-          echo "Timestamp: $(date)" >> build_output.txt
-          echo "Runner: ${{ runner.os }}" >> build_output.txt
+          echo "Build output for Python ${{ matrix.python-version }}" > output.txt
+          echo "Timestamp: $(date)" >> output.txt
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-f754fc5-py${{ matrix.python-version }}
-          path: build_output.txt
+          path: output.txt
+
